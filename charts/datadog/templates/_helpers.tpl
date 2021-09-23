@@ -503,3 +503,14 @@ true
 false
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return true if the Cluster check runners need a confd configmap
+*/}}
+{{- define "need-clusterchecks-confd" -}}
+{{- if (or .Values.datadog.kubeStateMetricsCore.enabled) -}}
+true
+{{- else -}}
+false
+{{- end -}}
+{{- end -}}

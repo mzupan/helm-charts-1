@@ -171,6 +171,11 @@ spec:
             mountPath: /etc/datadog-agent/install_info
             {{- end }}
             readOnly: true
+{{- if eq (include "need-clusterchecks-confd" .) "true" }}
+          - name: confd
+            mountPath: /conf.d
+            readOnly: true
+{{- end }}
           - name: config
             mountPath: {{ template "datadog.confPath" . }}
 {{- if .Values.clusterChecksRunner.volumeMounts }}
@@ -188,6 +193,11 @@ spec:
             name: {{ template "datadog.fullname" . }}-installinfo
 {{- if .Values.clusterChecksRunner.volumes }}
 {{ toYaml .Values.clusterChecksRunner.volumes | indent 8 }}
+{{- end }}
+{{- if eq (include "need-clusterchecks-confd" . ) "true" }}
+        - name: confd
+          configMap:
+            name: {{ template "datadog.fullname" . }}-clusterchecks-confd
 {{- end }}
         - name: config
           emptyDir: {}

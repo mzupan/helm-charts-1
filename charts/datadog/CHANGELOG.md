@@ -1,5 +1,9 @@
 # Datadog changelog
 
+## 2.22.8
+
+* Expose the `labels_as_tags` parameter of the KSM core check.
+
 ## 2.22.7
 
 * Add a default required pod anti-affinity for the cluster agent.

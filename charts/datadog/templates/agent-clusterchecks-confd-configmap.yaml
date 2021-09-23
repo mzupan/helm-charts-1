@@ -1,17 +1,12 @@
-{{- if eq (include "need-cluster-agent-confd" .) "true" }}
+{{- if eq (include "need-clusterchecks-confd" .) "true" }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "datadog.fullname" . }}-cluster-agent-confd
+  name: {{ template "datadog.fullname" . }}-clusterchecks-confd
   namespace: {{ .Release.Namespace }}
   labels:
 {{ include "datadog.labels" . | indent 4 }}
-  annotations:
-    checksum/confd-config: {{ tpl (toYaml .Values.clusterAgent.confd) . | sha256sum }}
 data:
-{{- if .Values.clusterAgent.confd }}
-{{ tpl (toYaml .Values.clusterAgent.confd) . | indent 2 }}
-{{- end }}
 {{- if .Values.datadog.kubeStateMetricsCore.enabled }}
   kubernetes_state_core.yaml.default: |-
     init_config:
