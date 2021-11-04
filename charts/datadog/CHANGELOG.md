@@ -1,5 +1,9 @@
 # Datadog changelog
 
+# 2.23.5
+
+* Add support for Universal Service Monitoring (currently under private Beta)
+
 # 2.23.4
 
 * Add a new configuration field `datadog.providers.eks.ec2.useHostnameFromFile` to allow use of host's `/var/lib/cloud/data/instance-id` for hostname detection.
